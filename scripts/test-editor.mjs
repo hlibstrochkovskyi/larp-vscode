@@ -1,8 +1,7 @@
-import { spawn } from 'node:child_process';
 import { mkdir, writeFile, rm, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import { runTests } from '@vscode/test-electron';
 
-// Use an installed VS Code. User data, extensions, and workspace are isolated.
 const root = resolve(import.meta.dirname, '..');
 const directory = resolve(root, '.vscode-test');
 const workspace = resolve(directory, 'workspace');
@@ -21,36 +20,31 @@ await writeFile(resolve(workspace, '.vscode/settings.json'), JSON.stringify({
   'files.autoSave': 'off',
   'security.workspace.trust.enabled': false,
 }));
+// Never forward requests to an existing personal editor session.
+delete process.env.ELECTRON_RUN_AS_NODE;
+delete process.env.VSCODE_IPC_HOOK_CLI;
 const extra = process.env.VSCODE_HEADLESS === '1'
   ? ['--ozone-platform=headless', '--disable-gpu'] : [];
-const env = { ...process.env, LARP_EDITOR_RESULT: resultFile };
-delete env.ELECTRON_RUN_AS_NODE;
-delete env.VSCODE_IPC_HOOK_CLI;
-const child = spawn(process.env.VSCODE_EXECUTABLE || 'code', [
-  '--new-window', '--wait', '--no-sandbox', '--skip-welcome', '--skip-release-notes',
-  '--disable-workspace-trust', '--disable-updates', '--disable-telemetry',
-  `--user-data-dir=${resolve(directory, 'user-data')}`,
-  `--extensions-dir=${resolve(directory, 'extensions')}`,
-  `--extensionDevelopmentPath=${root}`,
-  `--extensionTestsPath=${resolve(root, 'tests/editor.cjs')}`,
-  ...extra, workspace,
-], { stdio: 'inherit', env });
-const timer = setTimeout(() => {
-  console.error('VS Code editor tests exceeded 90 seconds.');
-  child.kill('SIGTERM');
-  process.exitCode = 1;
-}, 90_000);
-child.on('error', error => {
-  clearTimeout(timer);
-  console.error(error.message);
-  process.exitCode = 1;
-});
-child.on('exit', async code => {
-  clearTimeout(timer);
-  try {
-    if (code !== 0 || (await readFile(resultFile, 'utf8')).trim() !== 'passed') throw new Error();
-  } catch {
-    console.error('VS Code editor tests did not complete successfully. See the editor output above.');
-    process.exitCode = 1;
+try {
+  await runTests({
+    vscodeExecutablePath: process.env.VSCODE_EXECUTABLE || undefined,
+    version: process.env.VSCODE_VERSION || 'stable',
+    cachePath: directory,
+    extensionDevelopmentPath: root,
+    extensionTestsPath: resolve(root, 'tests/editor.cjs'),
+    extensionTestsEnv: { LARP_EDITOR_RESULT: resultFile },
+    launchArgs: [
+      workspace, '--no-sandbox', '--skip-welcome', '--skip-release-notes',
+      '--disable-workspace-trust', '--disable-updates', '--disable-telemetry',
+      `--user-data-dir=${resolve(directory, 'user-data')}`,
+      `--extensions-dir=${resolve(directory, 'extensions')}`,
+      ...extra,
+    ],
+  });
+  if ((await readFile(resultFile, 'utf8')).trim() !== 'passed') {
+    throw new Error('The editor did not report successful test completion.');
   }
-});
+} catch (error) {
+  console.error('VS Code editor tests did not complete successfully:', error.message);
+  process.exitCode = 1;
+}

@@ -1,0 +1,47 @@
+name: Validate LARP extension
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  grammar-and-package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run package
+      - uses: actions/upload-artifact@v4
+        with:
+          name: larp-vscode-vsix
+          path: |
+            dist/*.vsix
+            dist/*.sha256
+          if-no-files-found: error
+
+  editor:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        vscode: ['1.85.2', 'stable']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: xvfb-run -a npm run test:editor
+        env:
+          VSCODE_VERSION: ${{ matrix.vscode }}

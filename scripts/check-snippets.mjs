@@ -2,6 +2,7 @@ import { spawnSync } from 'node:child_process';
 import { mkdtemp, readFile, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const compiler = process.env.LARP_CLI || 'larp';
 const version = spawnSync(compiler, ['--version'], { encoding: 'utf8' });
@@ -35,7 +36,6 @@ try {
   const manifest = JSON.parse(await readFile(new URL('manifest.json', fixtures), 'utf8'));
   for (const fixture of manifest.files.filter(f => f.path.startsWith('examples/'))) {
     const file = new URL(fixture.path, fixtures);
-    const { fileURLToPath } = await import('node:url');
     const checked = spawnSync(compiler, ['check', fileURLToPath(file)], { encoding: 'utf8' });
     if (checked.status !== 0) throw new Error(`${fixture.path}:\n${checked.stderr}`);
     console.log(`Compiler accepts example: ${fixture.path}`);
