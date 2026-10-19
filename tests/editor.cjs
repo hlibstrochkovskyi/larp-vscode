@@ -17,10 +17,14 @@ exports.run = async function () {
     editor.options = { insertSpaces: true, tabSize: 4 };
     const end = document.positionAt(content.length);
     editor.selection = new vscode.Selection(end, end);
+    // Auto-outdent requires VS Code's background tokenizer to reach this line.
+    // Document edits complete before the renderer's tokenization pass.
+    await new Promise(resolve => setTimeout(resolve, 100));
     return editor;
   }
   async function type(text) {
     await vscode.commands.executeCommand('type', { text });
+    await new Promise(resolve => setTimeout(resolve, 100));
   }
 
   for (const [open, close] of [['(', ')'], ['[', ']'], ['{', '}'], ['"', '"']]) {
