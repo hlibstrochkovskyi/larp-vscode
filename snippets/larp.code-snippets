@@ -1,0 +1,141 @@
+{
+  "Program entry": {
+    "prefix": "main",
+    "body": [
+      "main_character {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Program entry point."
+  },
+  "Function": {
+    "prefix": "sidequest",
+    "body": [
+      "sidequest ${1:quest}(${2}) -> ${3:unit} {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Named function with an explicit result type."
+  },
+  "Inferred binding": {
+    "prefix": "let",
+    "body": "let ${1:value} = ${2:0};$0",
+    "description": "Mutable local binding with an inferred type."
+  },
+  "Typed binding": {
+    "prefix": "var",
+    "body": "${1:mf} ${2:value} = ${3:0};$0",
+    "description": "Mutable local binding with an explicit type."
+  },
+  "If": {
+    "prefix": "if",
+    "body": [
+      "if (${1:fr}) {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Conditional block."
+  },
+  "If / else": {
+    "prefix": "ifelse",
+    "body": [
+      "if (${1:fr}) {",
+      "\t${2}",
+      "} else {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Conditional with an alternative block."
+  },
+  "Range loop": {
+    "prefix": "npc",
+    "body": [
+      "npc loop (mf ${1:i} in ${2:0}..${3:10}) {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Ascending loop with an exclusive upper bound."
+  },
+  "While loop": {
+    "prefix": "locked_in",
+    "body": [
+      "locked_in while (${1:cap}) {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Loop while a verdict is true."
+  },
+  "Infinite loop": {
+    "prefix": "goon",
+    "body": [
+      "goon {",
+      "\t${0:touch_grass;}",
+      "}"
+    ],
+    "description": "Infinite loop; touch_grass exits the loop."
+  },
+  "Observation": {
+    "prefix": "yap",
+    "body": "yap(${1:\"Fake it till you compile.\"});$0",
+    "description": "Print an observed value."
+  },
+  "Archetype": {
+    "prefix": "archetype",
+    "body": [
+      "archetype ${1:Founder} {",
+      "\tinit() {",
+      "\t\t$0",
+      "\t}",
+      "}"
+    ],
+    "description": "Class with its required constructor."
+  },
+  "Role": {
+    "prefix": "role",
+    "body": [
+      "role ${1:Scored} {",
+      "\tsidequest ${2:score}() -> ${3:mf} uses(${4:read});",
+      "\t$0",
+      "}"
+    ],
+    "description": "Role with a public method signature."
+  },
+  "Scenario": {
+    "prefix": "larp",
+    "body": [
+      "larp (${1:bro}) as ${2:Trial} {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Hypothetical state block for an existing concrete root."
+  },
+  "Claim": {
+    "prefix": "flex",
+    "body": "flex ${1:bro}.${2:aura} = ${3:49};$0",
+    "description": "Record a claim and set a scenario root field."
+  },
+  "Select field": {
+    "prefix": "canon",
+    "body": "canon ${1:bro}.${2:aura};$0",
+    "description": "Select a scenario root field for commit."
+  },
+  "Lazy binding": {
+    "prefix": "nonchalant",
+    "body": "nonchalant ${1:mf} ${2:value} = ${3:49};$0",
+    "description": "Read-only, memoized SnapshotValue binding."
+  },
+  "Suppressed observations": {
+    "prefix": "sybau",
+    "body": [
+      "sybau {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Suppress ordinary observations within a block."
+  },
+  "Lambda": {
+    "prefix": "lambda",
+    "body": "(${1:mf} ${2:value}) => ${3:value}$0",
+    "description": "Lambda with an explicitly typed parameter."
+  }
+}

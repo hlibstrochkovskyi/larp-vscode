@@ -1,0 +1,417 @@
+{
+  "repository": "https://github.com/hlibstrochkovskyi/larp-lang",
+  "commit": "5bd3f1f4f9de9be6b7ce6d195bf952f21d88bdc1",
+  "compilerRelease": "v0.1.0-preview.1",
+  "releaseCommit": "61cc9314916c510673112dc799e247c0f59cc3b9",
+  "files": [
+    {
+      "path": "examples/callbacks.larp",
+      "blob": "3e28978c006502f06dae387157f60566fdafa506"
+    },
+    {
+      "path": "examples/collections.larp",
+      "blob": "06185d106f17d09b9bebf035d85406f298417cf4"
+    },
+    {
+      "path": "examples/config-tuning-explicit.larp",
+      "blob": "46455146d2dc5d92d9ae7f11da5acd9c9d8c545e"
+    },
+    {
+      "path": "examples/config-tuning.larp",
+      "blob": "15c73031e6afbbcd576c1fba156058ac0087dbc6"
+    },
+    {
+      "path": "examples/game-training-explicit.larp",
+      "blob": "9ae986080cf18c2d69cd5847a47281aefe9c604a"
+    },
+    {
+      "path": "examples/game-training.larp",
+      "blob": "cc1f29c8d677eab1ef720470946dcd3e970c4eab"
+    },
+    {
+      "path": "examples/hello.larp",
+      "blob": "1202e6c9028c383127e2432d76b3c29c8577bcce"
+    },
+    {
+      "path": "examples/input-sum.larp",
+      "blob": "f7c9771d3c873c4fbfc791a50bf2ea48e0447337"
+    },
+    {
+      "path": "examples/lazy.larp",
+      "blob": "1313805510df79b1e717f7a295dc5c87ee575ad7"
+    },
+    {
+      "path": "examples/objects.larp",
+      "blob": "7675f8b73843015e123fb99a302dc3df341d019e"
+    },
+    {
+      "path": "examples/pitch-deck.larp",
+      "blob": "6b28f3d133c624ee3f109e87645211c64d9e58fc"
+    },
+    {
+      "path": "examples/primes.larp",
+      "blob": "1bc814bdbea7a004f46269bb62728c4d46fe8d51"
+    },
+    {
+      "path": "examples/roles.larp",
+      "blob": "029678fc68aff8a50526204bbb4c1ff72223737a"
+    },
+    {
+      "path": "tests/conformance/fail/bound-effect-erasure.larp",
+      "blob": "a709df7d79d9c0f802720ca5814f364723d90d7a"
+    },
+    {
+      "path": "tests/conformance/fail/canon-outside.larp",
+      "blob": "71b3b65d618b1e7891a44d6302fc6d90cc31c3cf"
+    },
+    {
+      "path": "tests/conformance/fail/capture-write.larp",
+      "blob": "07f09b62c82db5169bb5d2006de018ebbcc817e9"
+    },
+    {
+      "path": "tests/conformance/fail/collection-callback-result.larp",
+      "blob": "75099b0be379b4259ea4a645eaa96145d2ced01a"
+    },
+    {
+      "path": "tests/conformance/fail/constructor-mutation.larp",
+      "blob": "529b9e1544775f097a6e87b6240a7d9b991ff691"
+    },
+    {
+      "path": "tests/conformance/fail/effect-callback.larp",
+      "blob": "84fda48bddd32094052874c9823502815f78aeb8"
+    },
+    {
+      "path": "tests/conformance/fail/empty-array.larp",
+      "blob": "32b599b444132fabe4015a88e68677bd2da50165"
+    },
+    {
+      "path": "tests/conformance/fail/extension-member-arity.larp",
+      "blob": "5f4032a3907bfdceb3a20c3b75d1c7626dda028c"
+    },
+    {
+      "path": "tests/conformance/fail/extension-private-priority.larp",
+      "blob": "9141ff9b43685e2b71a5d233d196304a42ae5d0e"
+    },
+    {
+      "path": "tests/conformance/fail/fixed-array-length.larp",
+      "blob": "dc26ea73e6a00595faeadcb3a6f36187de5f5f90"
+    },
+    {
+      "path": "tests/conformance/fail/function-effect-erasure.larp",
+      "blob": "f21ae9700fedc7d495cdd7aaccf57be437416197"
+    },
+    {
+      "path": "tests/conformance/fail/inference.larp",
+      "blob": "6d2cb29f4490c05b981f53a8244aabd72aa2a0b0"
+    },
+    {
+      "path": "tests/conformance/fail/io-erasure.larp",
+      "blob": "8a13849997c7f3ecad1facad5e1791a49f4085c0"
+    },
+    {
+      "path": "tests/conformance/fail/io-indirect.larp",
+      "blob": "ca6de0ddf638d63834ed233117a13c745853682f"
+    },
+    {
+      "path": "tests/conformance/fail/io-lazy.larp",
+      "blob": "ed31de9abe61c982ea7221936584b05ff4b9c2d7"
+    },
+    {
+      "path": "tests/conformance/fail/io-scenario.larp",
+      "blob": "075239405c0e28ec1e721008c76f9090fc2d8778"
+    },
+    {
+      "path": "tests/conformance/fail/lambda-dead-return.larp",
+      "blob": "6c109274b1b389b3b288e60e44251e40249ebff0"
+    },
+    {
+      "path": "tests/conformance/fail/lazy-array-capture.larp",
+      "blob": "048a52a1e7924efd52dbf56a44f77bc602780cea"
+    },
+    {
+      "path": "tests/conformance/fail/lazy-effect-erasure.larp",
+      "blob": "1db061a15f0e030b96165381dbe76758cec93426"
+    },
+    {
+      "path": "tests/conformance/fail/lazy-observation.larp",
+      "blob": "e5da37f947c5233fe708213645ca03a282acbe13"
+    },
+    {
+      "path": "tests/conformance/fail/lazy-reassignment.larp",
+      "blob": "c6cd8d6446276dcc7bfb88793b7f710544e9777d"
+    },
+    {
+      "path": "tests/conformance/fail/missing-field.larp",
+      "blob": "6bcffea128d2762a2feb3111097d68fd6f1aa7c5"
+    },
+    {
+      "path": "tests/conformance/fail/missing-return.larp",
+      "blob": "83b29f31e4f5f871876528b599405c0260b31614"
+    },
+    {
+      "path": "tests/conformance/fail/mixed-width.larp",
+      "blob": "26d5d96deb9d3dd80d4dfc860033c0f9982a642b"
+    },
+    {
+      "path": "tests/conformance/fail/narrowing.larp",
+      "blob": "973848885c236b1ff0fb57fd79a5f05249b4445f"
+    },
+    {
+      "path": "tests/conformance/fail/nominal-classes.larp",
+      "blob": "39d9e5132f319bea8bfbb046acc16dad1e7f8db8"
+    },
+    {
+      "path": "tests/conformance/fail/partial-self.larp",
+      "blob": "6929c827ffff63495503899464842f9665f5763d"
+    },
+    {
+      "path": "tests/conformance/fail/private-field.larp",
+      "blob": "a1332ab3b5dbd56a431601c76c18960d142a40a7"
+    },
+    {
+      "path": "tests/conformance/fail/private-method.larp",
+      "blob": "b60dd1ca033858121dff25b25e047e6ace4a87e2"
+    },
+    {
+      "path": "tests/conformance/fail/role-effects.larp",
+      "blob": "e7be37541f717082eff11f5a4333794ba41f2d7e"
+    },
+    {
+      "path": "tests/conformance/fail/role-missing.larp",
+      "blob": "6c9fef76396c9bb6340877ff5c2179474fac91c9"
+    },
+    {
+      "path": "tests/conformance/fail/role-nominal.larp",
+      "blob": "302fde7bf1856095cb0442c38aee39c3b7a66ac4"
+    },
+    {
+      "path": "tests/conformance/fail/scenario-alias.larp",
+      "blob": "055f0e2f3c35aaf981eec0b72606c88436da3ef9"
+    },
+    {
+      "path": "tests/conformance/fail/scenario-escape.larp",
+      "blob": "7aa866486024aaf94f842a8ea15892771041e727"
+    },
+    {
+      "path": "tests/conformance/fail/scenario-hidden-allocation.larp",
+      "blob": "e01ebbbfe1fb96368418908b5761ebd61d7ec31c"
+    },
+    {
+      "path": "tests/conformance/fail/scenario-nested.larp",
+      "blob": "9accb1ef201d5a078f86e3b27b6f6dc067f1e75c"
+    },
+    {
+      "path": "tests/conformance/fail/scenario-reference-field.larp",
+      "blob": "759a861e0a71151081d4aaaf360205adc50b73e2"
+    },
+    {
+      "path": "tests/conformance/fail/scenario-return.larp",
+      "blob": "db0c6f43113450ae9edad661cffd9d222485ae9b"
+    },
+    {
+      "path": "tests/conformance/fail/truthiness.larp",
+      "blob": "6a128e03c236ec8cf2263de95b46440d5513a7ff"
+    },
+    {
+      "path": "tests/conformance/fail/unconstrained-lambda.larp",
+      "blob": "b982bee89fac1ade3e670879d67e5b4cb5bc334d"
+    },
+    {
+      "path": "tests/conformance/pass/array-aliases.larp",
+      "blob": "b8132db3be7cdfc51c2d6d0ac9a1202ae6250c63"
+    },
+    {
+      "path": "tests/conformance/pass/array-function-results.larp",
+      "blob": "1d31a4e45d6f7b68ff1b4adbf4b5b4caf3b5ea2d"
+    },
+    {
+      "path": "tests/conformance/pass/array-text.larp",
+      "blob": "9546729a8a183270dfde5a830823b6314d764afd"
+    },
+    {
+      "path": "tests/conformance/pass/bound-builtins.larp",
+      "blob": "e1a29e83119c3a616955138f059ff8d7a04aa064"
+    },
+    {
+      "path": "tests/conformance/pass/bound-private.larp",
+      "blob": "97164b04e999c83dd90cfbcf0e7b50f2fc62840e"
+    },
+    {
+      "path": "tests/conformance/pass/branches.larp",
+      "blob": "8286cfbab9ba3a614b9561140d0d2f1e5480d42c"
+    },
+    {
+      "path": "tests/conformance/pass/closure-gc.larp",
+      "blob": "25650e44eafacd2dec9f841f4d84e69fb784dcf9"
+    },
+    {
+      "path": "tests/conformance/pass/closures.larp",
+      "blob": "f09f71d3ce2a3c7fccdfd77f3dadc672c3c71acc"
+    },
+    {
+      "path": "tests/conformance/pass/collections.larp",
+      "blob": "5f678f30e5507b330dd3d96d18c9c17129635d02"
+    },
+    {
+      "path": "tests/conformance/pass/config-tuning-explicit.larp",
+      "blob": "46455146d2dc5d92d9ae7f11da5acd9c9d8c545e"
+    },
+    {
+      "path": "tests/conformance/pass/config-tuning.larp",
+      "blob": "15c73031e6afbbcd576c1fba156058ac0087dbc6"
+    },
+    {
+      "path": "tests/conformance/pass/constant-flow.larp",
+      "blob": "4361a8ee58efd69237112f7f960012f5e0484c47"
+    },
+    {
+      "path": "tests/conformance/pass/constructor-flow.larp",
+      "blob": "4fd192c158506c447af1dd26564d8397532c1e9e"
+    },
+    {
+      "path": "tests/conformance/pass/conversions.larp",
+      "blob": "d6ac47c3791ccd64a6771c338c96347c41398363"
+    },
+    {
+      "path": "tests/conformance/pass/fixed-array.larp",
+      "blob": "17b1eaa4959534f0f84cd0f1254e5d4757aa7f1f"
+    },
+    {
+      "path": "tests/conformance/pass/fixed-literal-equality.larp",
+      "blob": "cfbbfc63f18eced372cec4447d7095357a0891ae"
+    },
+    {
+      "path": "tests/conformance/pass/floats.larp",
+      "blob": "8c0037edd204961e3516f554acaf4690db1864ef"
+    },
+    {
+      "path": "tests/conformance/pass/function-payloads.larp",
+      "blob": "10f7203464f69a62d547eac3b4fd03f195bd986f"
+    },
+    {
+      "path": "tests/conformance/pass/functions.larp",
+      "blob": "b97100a9f4f0fc229ae1b18db909ca48e6764025"
+    },
+    {
+      "path": "tests/conformance/pass/game-training-explicit.larp",
+      "blob": "9ae986080cf18c2d69cd5847a47281aefe9c604a"
+    },
+    {
+      "path": "tests/conformance/pass/game-training.larp",
+      "blob": "cc1f29c8d677eab1ef720470946dcd3e970c4eab"
+    },
+    {
+      "path": "tests/conformance/pass/grouped-places.larp",
+      "blob": "9fe7a1b8a5b3f6badf7604c6c3cf5e4b592a0bd0"
+    },
+    {
+      "path": "tests/conformance/pass/host-input.larp",
+      "blob": "0ab4df937e8c3fb2515c92b746d437849ea1a1e9"
+    },
+    {
+      "path": "tests/conformance/pass/input-eof.larp",
+      "blob": "24ebaa64116fb145792124c8ce95db7bc01bf012"
+    },
+    {
+      "path": "tests/conformance/pass/input-sum.larp",
+      "blob": "f7c9771d3c873c4fbfc791a50bf2ea48e0447337"
+    },
+    {
+      "path": "tests/conformance/pass/lazy-capture.larp",
+      "blob": "08bec6ab47cf112bcb6f6f4c3e8540ae22c1b0a6"
+    },
+    {
+      "path": "tests/conformance/pass/lazy-scenario.larp",
+      "blob": "207a67cf9e335bb685e2b832883ed194f534a000"
+    },
+    {
+      "path": "tests/conformance/pass/lazy-suppression.larp",
+      "blob": "252cd641931b5c13f727a3004e76457ff24d083c"
+    },
+    {
+      "path": "tests/conformance/pass/lazy-unused.larp",
+      "blob": "b7e88ccb1835077180e1badb2f088c3114e6be11"
+    },
+    {
+      "path": "tests/conformance/pass/loops.larp",
+      "blob": "74fb4dfa729b4c6514322e292f386d44db6c7653"
+    },
+    {
+      "path": "tests/conformance/pass/objects.larp",
+      "blob": "6688650e45fc86ae572d13a6d81bad207b632eb2"
+    },
+    {
+      "path": "tests/conformance/pass/recovery.larp",
+      "blob": "02400c78da237de302d2a2f5ad9bd4efb4372f4b"
+    },
+    {
+      "path": "tests/conformance/pass/role-extension.larp",
+      "blob": "fff30c43a3670440e220ee0f6985b920114fac6d"
+    },
+    {
+      "path": "tests/conformance/pass/scalars.larp",
+      "blob": "8c3e865dd9f022be6bd926347736c712e10b3212"
+    },
+    {
+      "path": "tests/conformance/pass/scenario-method.larp",
+      "blob": "35c5f457992b245d156eba204662ddcd0153ff53"
+    },
+    {
+      "path": "tests/conformance/pass/scenario-result-is-data.larp",
+      "blob": "955a0897d8dd4c5069a0d938d70cf286572cc5e0"
+    },
+    {
+      "path": "tests/conformance/pass/scenario.larp",
+      "blob": "8702bd08563077990570b685b8499ca74dd74171"
+    },
+    {
+      "path": "tests/conformance/pass/short-circuit.larp",
+      "blob": "d2709bdeeaa96222b90afa1f09f8197822e3670e"
+    },
+    {
+      "path": "tests/conformance/pass/string-output.larp",
+      "blob": "028612dd050f06c716e555a0b88df1818a9b66d3"
+    },
+    {
+      "path": "tests/conformance/runtime/array-bounds.larp",
+      "blob": "35d9b03c17298aaa7cb674cb4d8a0c13212e4101"
+    },
+    {
+      "path": "tests/conformance/runtime/assignment-bounds.larp",
+      "blob": "5cf53cb1eee0b53080ecc8e21b5503dc09563ea6"
+    },
+    {
+      "path": "tests/conformance/runtime/callback-mutation.larp",
+      "blob": "e2003d3c6de800c6224e9611489e6534f9b23b43"
+    },
+    {
+      "path": "tests/conformance/runtime/constructor-abort.larp",
+      "blob": "6d669ae4c0eda66db1f28de5700a03a7eb530d0a"
+    },
+    {
+      "path": "tests/conformance/runtime/conversion.larp",
+      "blob": "3a45a4dfdedea3feea96681be534fb58396fb404"
+    },
+    {
+      "path": "tests/conformance/runtime/lazy-division.larp",
+      "blob": "6964dbfc0d56dfe4eecbbcaa988ba7b5b4daabd0"
+    },
+    {
+      "path": "tests/conformance/runtime/overflow.larp",
+      "blob": "a2179386bbbdd67d9114fadb3c0278ed85fb2427"
+    },
+    {
+      "path": "tests/conformance/runtime/scenario-abort.larp",
+      "blob": "7f578b7767e9d1858060ee45a35f24a1edd5fc6d"
+    },
+    {
+      "path": "tests/conformance/runtime/scenario-observed-abort.larp",
+      "blob": "2b2c6f39a12bd20fd0f72c3d6fd3bf323190956a"
+    },
+    {
+      "path": "tests/conformance/runtime/suppressed-abort.larp",
+      "blob": "aa6c7d1abeeddbcfe727f2ee79b136fd33faea22"
+    }
+  ],
+  "lexerBlob": "c8ea4efe26f12bdf4e2f8cedcc8d7f8c56cdabe2"
+}

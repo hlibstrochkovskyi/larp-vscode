@@ -1,0 +1,587 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "LARP",
+  "scopeName": "source.larp",
+  "fileTypes": [
+    "larp"
+  ],
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#strings"
+    },
+    {
+      "include": "#numbers"
+    },
+    {
+      "include": "#class-declaration"
+    },
+    {
+      "include": "#function-declaration"
+    },
+    {
+      "include": "#constructor"
+    },
+    {
+      "include": "#scenario-label"
+    },
+    {
+      "include": "#effects"
+    },
+    {
+      "include": "#inferred-binding"
+    },
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#generic-types"
+    },
+    {
+      "include": "#typed-name"
+    },
+    {
+      "include": "#return-type"
+    },
+    {
+      "include": "#builtin-types"
+    },
+    {
+      "include": "#operators"
+    },
+    {
+      "include": "#members"
+    },
+    {
+      "include": "#builtins"
+    },
+    {
+      "include": "#calls"
+    },
+    {
+      "include": "#punctuation"
+    },
+    {
+      "include": "#identifiers"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.double-slash.larp",
+          "begin": "//",
+          "end": "$",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.comment.larp"
+            }
+          }
+        },
+        {
+          "name": "comment.block.larp",
+          "begin": "/\\*",
+          "end": "\\*/",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.comment.begin.larp"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.comment.end.larp"
+            }
+          }
+        }
+      ]
+    },
+    "strings": {
+      "name": "string.quoted.double.larp",
+      "begin": "\"",
+      "end": "\"|(?=$)",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.larp"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.larp"
+        }
+      },
+      "patterns": [
+        {
+          "match": "\\\\[\"\\\\nrt]",
+          "name": "constant.character.escape.larp"
+        },
+        {
+          "match": "\\\\[^\"\\\\nrt]|\\\\$",
+          "name": "invalid.illegal.escape.larp"
+        }
+      ]
+    },
+    "numbers": {
+      "patterns": [
+        {
+          "match": "(?<![A-Za-z0-9_])[0-9](?:_?[0-9])*(?:\\.[0-9](?:_?[0-9])*(?:[eE][+-]?[0-9](?:_?[0-9])*)?|[eE][+-]?[0-9](?:_?[0-9])*)(?![A-Za-z0-9_])",
+          "name": "constant.numeric.float.larp"
+        },
+        {
+          "match": "(?<![A-Za-z0-9_])[0-9](?:_?[0-9])*(?![A-Za-z0-9_])(?!\\.[0-9])",
+          "name": "constant.numeric.integer.larp"
+        },
+        {
+          "match": "(?<![A-Za-z0-9_])[0-9][A-Za-z0-9_]*(?:\\.[0-9_]+)?(?:[eE][+-]?[A-Za-z0-9_]*)?",
+          "name": "invalid.illegal.numeric.larp"
+        }
+      ]
+    },
+    "class-declaration": {
+      "name": "meta.type.declaration.larp",
+      "begin": "(?<![A-Za-z0-9_])(?:archetype|role)(?![A-Za-z0-9_])",
+      "beginCaptures": {
+        "0": {
+          "name": "storage.type.declaration.larp"
+        }
+      },
+      "end": "(?=[{;])",
+      "patterns": [
+        {
+          "include": "#comments"
+        },
+        {
+          "match": "[A-Za-z_][A-Za-z0-9_]*",
+          "name": "entity.name.type.larp"
+        },
+        {
+          "match": ":",
+          "name": "punctuation.separator.inheritance.larp"
+        },
+        {
+          "match": ",",
+          "name": "punctuation.separator.comma.larp"
+        }
+      ]
+    },
+    "function-declaration": {
+      "name": "meta.function.declaration.larp",
+      "begin": "(?<![A-Za-z0-9_])(?:sidequest)(?![A-Za-z0-9_])",
+      "beginCaptures": {
+        "0": {
+          "name": "storage.type.function.larp"
+        }
+      },
+      "end": "(?=\\(|[{};])",
+      "patterns": [
+        {
+          "include": "#comments"
+        },
+        {
+          "include": "#generic-types"
+        },
+        {
+          "include": "#builtin-types"
+        },
+        {
+          "match": "[A-Za-z_][A-Za-z0-9_]*(?=[ \\t]*\\.)",
+          "name": "storage.type.larp"
+        },
+        {
+          "match": "\\.",
+          "name": "punctuation.accessor.larp"
+        },
+        {
+          "match": "[A-Za-z_][A-Za-z0-9_]*",
+          "name": "entity.name.function.larp"
+        }
+      ]
+    },
+    "constructor": {
+      "patterns": [
+        {
+          "match": "(?<![A-Za-z0-9_])(?:init)(?![A-Za-z0-9_])",
+          "name": "entity.name.function.constructor.larp"
+        },
+        {
+          "name": "meta.instance.larp",
+          "begin": "(?<![A-Za-z0-9_])(?:new)(?![A-Za-z0-9_])",
+          "beginCaptures": {
+            "0": {
+              "name": "keyword.operator.new.larp"
+            }
+          },
+          "end": "(?=\\(|[{};])",
+          "patterns": [
+            {
+              "include": "#comments"
+            },
+            {
+              "match": "[A-Za-z_][A-Za-z0-9_]*",
+              "name": "entity.name.type.larp"
+            }
+          ]
+        }
+      ]
+    },
+    "scenario-label": {
+      "name": "meta.scenario.label.larp",
+      "begin": "(?<![A-Za-z0-9_])(?:as)(?![A-Za-z0-9_])",
+      "beginCaptures": {
+        "0": {
+          "name": "keyword.control.scenario.larp"
+        }
+      },
+      "end": "(?=[{;])",
+      "patterns": [
+        {
+          "include": "#comments"
+        },
+        {
+          "match": "[A-Za-z_][A-Za-z0-9_]*",
+          "name": "entity.name.label.larp"
+        }
+      ]
+    },
+    "effects": {
+      "name": "meta.effects.larp",
+      "begin": "(?<![A-Za-z0-9_])(?:uses)(?![A-Za-z0-9_])",
+      "beginCaptures": {
+        "0": {
+          "name": "storage.modifier.effect.larp"
+        }
+      },
+      "end": "(?<=\\))|(?=[{};=])",
+      "patterns": [
+        {
+          "include": "#comments"
+        },
+        {
+          "begin": "\\(",
+          "end": "\\)",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.section.parameters.begin.larp"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.section.parameters.end.larp"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#comments"
+            },
+            {
+              "match": "(?<![A-Za-z0-9_])(?:read|write|observe|io|abort)(?![A-Za-z0-9_])",
+              "name": "support.constant.effect.larp"
+            },
+            {
+              "match": "[A-Za-z_][A-Za-z0-9_]*",
+              "name": "variable.other.larp"
+            },
+            {
+              "match": ",",
+              "name": "punctuation.separator.comma.larp"
+            }
+          ]
+        }
+      ]
+    },
+    "builtin-types": {
+      "match": "(?<![A-Za-z0-9_])(?:mf|unc|geeked|verdict|text|unit|mfs|hediJeans|baddie|result|ConversionError)(?![A-Za-z0-9_])",
+      "name": "support.type.larp"
+    },
+    "generic-types": {
+      "patterns": [
+        {
+          "name": "meta.type.generic.larp",
+          "begin": "(?<![A-Za-z0-9_])(?:mfs|hediJeans|baddie|result)(?![A-Za-z0-9_])(?=[ \\t]*(?:<|/\\*|//|$))",
+          "beginCaptures": {
+            "0": {
+              "name": "support.type.larp"
+            }
+          },
+          "end": "(?<=>)|(?=[;={}])",
+          "patterns": [
+            {
+              "include": "#comments"
+            },
+            {
+              "include": "#type-arguments"
+            }
+          ]
+        },
+        {
+          "name": "meta.function.generic.larp",
+          "begin": "(?<![A-Za-z0-9_])(?:ascend|fraud)(?![A-Za-z0-9_])(?=[ \\t]*(?:<|/\\*|//|$))",
+          "beginCaptures": {
+            "0": {
+              "name": "support.function.larp"
+            }
+          },
+          "end": "(?<=>)|(?=[;={}])",
+          "patterns": [
+            {
+              "include": "#comments"
+            },
+            {
+              "include": "#type-arguments"
+            }
+          ]
+        }
+      ]
+    },
+    "type-arguments": {
+      "name": "meta.type.arguments.larp",
+      "begin": "<",
+      "end": ">|(?=[;={}])",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.typeparameters.begin.larp"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.typeparameters.end.larp"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#comments"
+        },
+        {
+          "include": "#type-arguments"
+        },
+        {
+          "include": "#effects"
+        },
+        {
+          "include": "#numbers"
+        },
+        {
+          "include": "#builtin-types"
+        },
+        {
+          "match": "(?<![A-Za-z0-9_])(?:fn)(?![A-Za-z0-9_])",
+          "name": "storage.type.function.larp"
+        },
+        {
+          "match": "[A-Za-z_][A-Za-z0-9_]*",
+          "name": "storage.type.larp"
+        },
+        {
+          "match": "->",
+          "name": "keyword.operator.type.larp"
+        },
+        {
+          "include": "#punctuation"
+        }
+      ]
+    },
+    "typed-name": {
+      "match": "(?<![A-Za-z0-9_])([A-Za-z_][A-Za-z0-9_]*)([ \\t]+)([A-Za-z_][A-Za-z0-9_]*)(?![A-Za-z0-9_])(?=[ \\t]*(?:[=;,)\\[]|\\bin\\b))",
+      "captures": {
+        "1": {
+          "name": "storage.type.larp"
+        },
+        "3": {
+          "name": "variable.other.definition.larp"
+        }
+      }
+    },
+    "return-type": {
+      "match": "(->)([ \\t]*)(?!(?:mf|unc|geeked|verdict|text|unit|mfs|hediJeans|baddie|result|ConversionError|fn)\\b)([A-Za-z_][A-Za-z0-9_]*)(?![A-Za-z0-9_])",
+      "captures": {
+        "1": {
+          "name": "keyword.operator.type.larp"
+        },
+        "3": {
+          "name": "storage.type.larp"
+        }
+      }
+    },
+    "inferred-binding": {
+      "name": "meta.binding.larp",
+      "begin": "(?<![A-Za-z0-9_])(?:let)(?![A-Za-z0-9_])",
+      "beginCaptures": {
+        "0": {
+          "name": "storage.type.inferred.larp"
+        }
+      },
+      "end": "(?==|[{};])",
+      "patterns": [
+        {
+          "include": "#comments"
+        },
+        {
+          "match": "[A-Za-z_][A-Za-z0-9_]*",
+          "name": "variable.other.definition.larp"
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "match": "(?<![A-Za-z0-9_])(?:fr|cap)(?![A-Za-z0-9_])",
+          "name": "constant.language.boolean.larp"
+        },
+        {
+          "match": "(?<![A-Za-z0-9_])(?:no_bitches)(?![A-Za-z0-9_])",
+          "name": "constant.language.none.larp"
+        },
+        {
+          "match": "(?<![A-Za-z0-9_])(?:self)(?![A-Za-z0-9_])",
+          "name": "variable.language.self.larp"
+        },
+        {
+          "match": "(?<![A-Za-z0-9_])(?:if|else|return|npc|loop|in|locked_in|while|goon|touch_grass)(?![A-Za-z0-9_])",
+          "name": "keyword.control.larp"
+        },
+        {
+          "match": "(?<![A-Za-z0-9_])(?:larp|flex|canon|sybau)(?![A-Za-z0-9_])",
+          "name": "keyword.control.scenario.larp"
+        },
+        {
+          "match": "(?<![A-Za-z0-9_])(?:nonchalant|highkey|lowkey)(?![A-Za-z0-9_])",
+          "name": "storage.modifier.larp"
+        },
+        {
+          "match": "(?<![A-Za-z0-9_])(?:main_character)(?![A-Za-z0-9_])",
+          "name": "entity.name.function.entry.larp"
+        },
+        {
+          "match": "(?<![A-Za-z0-9_])(?:fn)(?![A-Za-z0-9_])",
+          "name": "storage.type.function.larp"
+        },
+        {
+          "match": "(?<![A-Za-z0-9_])(?:mogg)(?![A-Za-z0-9_])",
+          "name": "keyword.operator.comparison.larp"
+        }
+      ]
+    },
+    "builtins": {
+      "patterns": [
+        {
+          "match": "(?<![A-Za-z0-9_])(?:yap|some|win|fumble|ascend|fraud|palantir|no_cap|crashout|parseScore|args|readLine)(?![A-Za-z0-9_])",
+          "name": "support.function.larp"
+        },
+        {
+          "match": "(?<![A-Za-z0-9_])(?:fortnine|PeterThiel)(?![A-Za-z0-9_])",
+          "name": "support.constant.larp"
+        }
+      ]
+    },
+    "members": {
+      "patterns": [
+        {
+          "match": "(\\.)([ \\t]*)(size|push|filter|map|sorted|forEach|copium|cope|isSome|isOk)(?![A-Za-z0-9_])",
+          "captures": {
+            "1": {
+              "name": "punctuation.accessor.larp"
+            },
+            "3": {
+              "name": "support.function.method.larp"
+            }
+          }
+        },
+        {
+          "match": "(\\.)([ \\t]*)([A-Za-z_][A-Za-z0-9_]*)(?![A-Za-z0-9_])(?=[ \\t]*\\()",
+          "captures": {
+            "1": {
+              "name": "punctuation.accessor.larp"
+            },
+            "3": {
+              "name": "entity.name.function.call.larp"
+            }
+          }
+        },
+        {
+          "match": "(\\.)([ \\t]*)([A-Za-z_][A-Za-z0-9_]*)(?![A-Za-z0-9_])",
+          "captures": {
+            "1": {
+              "name": "punctuation.accessor.larp"
+            },
+            "3": {
+              "name": "variable.other.member.larp"
+            }
+          }
+        }
+      ]
+    },
+    "calls": {
+      "match": "(?<![A-Za-z0-9_])[A-Za-z_][A-Za-z0-9_]*(?![A-Za-z0-9_])(?=[ \\t]*\\()",
+      "name": "entity.name.function.call.larp"
+    },
+    "operators": {
+      "patterns": [
+        {
+          "match": "->",
+          "name": "keyword.operator.type.larp"
+        },
+        {
+          "match": "=>",
+          "name": "storage.type.function.arrow.larp"
+        },
+        {
+          "match": "\\.\\.",
+          "name": "keyword.operator.range.larp"
+        },
+        {
+          "match": "==|!=|<=|>=|<|>",
+          "name": "keyword.operator.comparison.larp"
+        },
+        {
+          "match": "[+*/%\\-]?=",
+          "name": "keyword.operator.assignment.larp"
+        },
+        {
+          "match": "&&|\\|\\||!",
+          "name": "keyword.operator.logical.larp"
+        },
+        {
+          "match": "[+*/%\\-]",
+          "name": "keyword.operator.arithmetic.larp"
+        }
+      ]
+    },
+    "punctuation": {
+      "patterns": [
+        {
+          "match": "[{}]",
+          "name": "punctuation.section.block.larp"
+        },
+        {
+          "match": "[()]",
+          "name": "punctuation.section.parens.larp"
+        },
+        {
+          "match": "[\\[\\]]",
+          "name": "punctuation.section.brackets.larp"
+        },
+        {
+          "match": ";",
+          "name": "punctuation.terminator.statement.larp"
+        },
+        {
+          "match": ",",
+          "name": "punctuation.separator.comma.larp"
+        },
+        {
+          "match": ":",
+          "name": "punctuation.separator.colon.larp"
+        },
+        {
+          "match": "\\.",
+          "name": "punctuation.accessor.larp"
+        }
+      ]
+    },
+    "identifiers": {
+      "match": "[A-Za-z_][A-Za-z0-9_]*",
+      "name": "variable.other.larp"
+    }
+  }
+}

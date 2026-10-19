@@ -1,0 +1,10 @@
+**
+!package.json
+!README.md
+!CHANGELOG.md
+!LICENSE
+!language-configuration.json
+!syntaxes/
+!syntaxes/larp.tmLanguage.json
+!snippets/
+!snippets/larp.code-snippets

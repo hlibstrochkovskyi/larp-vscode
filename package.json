@@ -1,0 +1,77 @@
+{
+  "devDependencies": {
+    "@vscode/test-electron": "3.1.0",
+    "@vscode/vsce": "4.0.0",
+    "vscode-oniguruma": "2.0.1",
+    "vscode-textmate": "9.3.2"
+  },
+  "name": "larp-vscode",
+  "displayName": "LARP",
+  "description": "Official LARP language support: syntax highlighting, brackets, indentation, comments, and snippets.",
+  "version": "0.1.0",
+  "publisher": "hlibstrochkovskyi",
+  "license": "MIT",
+  "author": "Hlib Strochkovskyi",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Snippets"
+  ],
+  "keywords": [
+    "larp",
+    "language",
+    "syntax",
+    "highlighting"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hlibstrochkovskyi/larp-vscode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hlibstrochkovskyi/larp-vscode/issues"
+  },
+  "homepage": "https://github.com/hlibstrochkovskyi/larp-vscode#readme",
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    },
+    "virtualWorkspaces": true
+  },
+  "contributes": {
+    "languages": [
+      {
+        "id": "larp",
+        "aliases": [
+          "LARP",
+          "larp"
+        ],
+        "extensions": [
+          ".larp"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "larp",
+        "scopeName": "source.larp",
+        "path": "./syntaxes/larp.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "larp",
+        "path": "./snippets/larp.code-snippets"
+      }
+    ]
+  },
+  "scripts": {
+    "test": "node --test --test-isolation=none tests/*.test.mjs",
+    "test:editor": "node scripts/test-editor.mjs",
+    "package": "npm test && node scripts/package.mjs",
+    "check:vsix": "python3 scripts/check-vsix.py",
+    "test:compiler": "node scripts/check-snippets.mjs"
+  }
+}
